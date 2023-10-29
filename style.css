@@ -1,0 +1,234 @@
+/*  GLobal Styles */
+
+body{
+  background-image: url(files/back.jpg);
+}
+
+h1 {
+    color: rgb(255, 123, 0);
+    background-color: rgb(8, 126, 126);
+    font-style: oblique;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: sans-serif;
+    display: block;
+    max-height: none;
+
+}
+
+.d-flex {
+    display: flex;
+}
+
+.wrapper flex {
+    justify-items: center;
+}
+
+.container {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 30px;
+    margin: auto;
+
+    /* adjust the width as needed */
+    height: auto;
+}
+
+.clock {
+    font-size: 24px;
+    /* adjust the font size as needed */
+}
+
+.wrapper img {
+    height: auto;
+    width: 150px;
+    justify-items: center;
+}
+
+.wrapper img :hover {
+    box-shadow: 0px 1px 1px 10px rgba(194, 39, 39, 0.3);
+}
+
+.btn {
+    outline: none;
+    border: none;
+    background-color: #6c6c6c;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 1px;
+    transition: all 0.3s ease-in-out;
+}
+
+select {
+    appearance: none;
+    outline: black;
+    background-color: #6c6c6c;
+    padding: 0.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 2rem;
+    margin-right: 0.3rem;
+    cursor: pointer;
+    color: #0e141b;
+    border-color: black;
+}
+
+.mb {
+    margin-bottom: 1rem;
+}
+
+
+
+.date{
+    font-size: 20px;
+    font-weight: 600;
+    font-style: oblique;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.time{
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time span:not(:last-child){
+    position: relative;
+    max-width: 0 6px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.time span:last-child{
+    background: #2E94E3;
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 10px;
+    padding: 0 5px;
+    border-radius: 3px;
+}
+
+/* End GLobal Styles */
+
+.main-container {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    /*background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);*/
+}
+
+.clock-container {
+    padding: 2rem;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #96a6947a;
+}
+
+.current-time {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+
+}
+
+.alarm-form {
+    justify-content: space-between;
+    
+    width: 115%;
+
+}
+#stopAlarm{
+     border-color: black;
+     background-color: #6c6c6c;
+    border: 100px;
+    border-radius: 2rem;
+    font-weight: bold;
+    height: 25px;
+    cursor: pointer;
+    margin: -1em 2em 0 20em;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.submit-button {
+    border-color: black;
+    border: 100px;
+    border-radius: 2rem;
+    font-weight: bold;
+    justify-content: space-around;
+}
+
+.set-alarm-container {
+    width: 100%;
+}
+
+.set-alarm-container .set-alarm-container-title {
+    color: black;
+    font-weight: bold;
+    font-size: 1rem;
+
+}
+
+.alarm {
+    justify-content: space-between;
+    border-radius: 30px;
+    padding: 0.1rem 1rem;
+    align-items: center;
+}
+
+.alarm .delete-alarm {
+    border-radius: 2rem;
+    background-color: rgba(230, 13, 13, 0.918);
+    font-weight: bold;
+    color: wheat;
+    font-size: xx-medium;
+
+}
+
+.time {
+    color: #0e141b;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.btn:focus,
+.btn:hover {
+    box-shadow: #f8f7fc 2px 2px 2px 1px inset, #0f0f0e -2px -2px 10px 1px inset;
+}
+
+#stopAlarm:focus,
+#stopAlarm:hover {
+    box-shadow: #f8f7fc 2px 2px 2px 1px inset, #0f0f0e -2px -2px 10px 1px inset;
+}
+
+
+/* style of devices of screen size less than 768px */
+
+@media only screen and (min-width: 600px) {
+    /* adding padding to container */
+    .main-container {
+        padding-block: 2rem;
+    }
+    .clock-container {
+        justify-content: center;
+        border-radius: 50px;
+        width: 400px;
+        min-height: auto;
+    }
+}
