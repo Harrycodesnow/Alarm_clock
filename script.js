@@ -4,55 +4,47 @@ const minutesDropdown = document.querySelector("#minutes");
 const secondsDropdown = document.querySelector("#seconds");
 const amPmDropdown = document.querySelector("#am-pm");
 const setAlarmButton = document.querySelector("#submitButton");
-const alarmList = document.querySelector("#alarms-container");
+const alarmsContainer = document.querySelector("#alarms-container");
 const ringtoneAudio = new Audio('./files/ringtone.mp3');
 
-// Get the current date
 const currentDate = new Date();
 
-// Array of week days and months
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-// Get the week day, month, day, and year
 const currentWeekDay = weekDays[currentDate.getDay()];
 const currentMonth = months[currentDate.getMonth()];
 const currentDay = currentDate.getDate();
 const currentYear = currentDate.getFullYear();
 
-// Update the HTML elements with the values
 document.getElementById('week').textContent = currentWeekDay;
 document.getElementById('month').textContent = currentMonth;
 document.getElementById('date').textContent = currentDay;
 document.getElementById('year').textContent = currentYear;
 
-// Adding Hours, Minutes, Seconds in Dropdown Menu
 window.addEventListener("DOMContentLoaded", (event) => {
-  populateDropdown(1, 12, hoursDropdown);
-  populateDropdown(0, 59, minutesDropdown);
-  populateDropdown(0, 59, secondsDropdown);
-  setInterval(updateCurrentTime, 1000);
-  loadAlarms();
+  dropDownMenu(1, 12, hoursDropdown);
+  dropDownMenu(0, 59, minutesDropdown);
+  dropDownMenu(0, 59, secondsDropdown);
+  setInterval(getCurrentTime, 1000);
+  fetchAlarm();
 });
 
-// Event Listener added to Set Alarm Button
-setAlarmButton.addEventListener("click", handleAlarmInput);
+setAlarmButton.addEventListener("click", getInput);
 
 function updateClock() {
   var now = new Date();
   var hours = now.getHours();
   var minutes = now.getMinutes();
   var seconds = now.getSeconds();
-
   var timeString = hours.toString().padStart(2, '0') + ':' +
     minutes.toString().padStart(2, '0') + ':' +
     seconds.toString().padStart(2, '0');
 }
 
-// Update the clock every second
 setInterval(updateClock, 1000);
 
-function populateDropdown(start, end, element) {
+function dropDownMenu(start, end, element) {
   for (let i = start; i <= end; i++) {
     const option = document.createElement("option");
     option.value = i < 10 ? "0" + i : i;
@@ -61,7 +53,7 @@ function populateDropdown(start, end, element) {
   }
 }
 
-function updateCurrentTime() {
+function getCurrentTime() {
   let time = new Date();
   time = time.toLocaleTimeString("en-US", {
     hour: "numeric",
@@ -70,16 +62,22 @@ function updateCurrentTime() {
     hour12: true,
   });
   currentTimeElement.innerHTML = time;
+  return time;
 }
 
-function handleAlarmInput(e) {
+function getInput(e) {
   e.preventDefault();
-  const hourValue = hoursDropdown.value;
-  const minuteValue = minutesDropdown.value;
-  const secondValue = secondsDropdown.value;
-  const amPmValue = amPmDropdown.value;
+  const selectedHour = hoursDropdown.value;
+  const selectedMinute = minutesDropdown.value;
+  const selectedSecond = secondsDropdown.value;
+  const selectedAmPm = amPmDropdown.value;
 
-  const alarmTime = convertToTime(hourValue, minuteValue, secondValue, amPmValue);
+  const alarmTime = convertToTime(
+    selectedHour,
+    selectedMinute,
+    selectedSecond,
+    selectedAmPm
+  );
   setAlarm(alarmTime);
 }
 
@@ -112,7 +110,7 @@ function addAlarmToDom(time, intervalId) {
   `;
   const deleteButton = alarm.querySelector(".delete-alarm");
   deleteButton.addEventListener("click", (e) => deleteAlarm(e, time, intervalId));
-  alarmList.prepend(alarm);
+  alarmsContainer.prepend(alarm);
 }
 
 function checkAlarms() {
@@ -128,7 +126,7 @@ function saveAlarm(time) {
   localStorage.setItem("alarms", JSON.stringify(alarms));
 }
 
-function loadAlarms() {
+function fetchAlarm() {
   const alarms = checkAlarms();
   alarms.forEach((time) => {
     setAlarm(time, true);
@@ -139,7 +137,6 @@ function deleteAlarm(event, time, intervalId) {
   const self = event.target;
   clearInterval(intervalId);
   const alarm = self.parentElement;
-  console.log(time);
   deleteAlarmFromLocal(time);
   alarm.remove();
 }
