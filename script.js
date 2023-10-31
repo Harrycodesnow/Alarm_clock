@@ -5,7 +5,7 @@ const secondsDropdown = document.querySelector("#seconds");
 const amPmDropdown = document.querySelector("#am-pm");
 const setAlarmButton = document.querySelector("#submitButton");
 const alarmsContainer = document.querySelector("#alarms-container");
-const ringtoneAudio = new Audio('./files/ringtone.mp3');
+const ringtoneAudio = new Audio('./media/ringtone.mp3');
 
 const currentDate = new Date();
 
